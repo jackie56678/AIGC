@@ -1,4 +1,5 @@
 #!/bin/sh
+yum install net-tools lsof
 
 # 启动 Java 应用程序
 cd /ssadmin-server

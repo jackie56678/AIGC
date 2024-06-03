@@ -42,7 +42,8 @@ public class SourceController {
                 System.out.println("文件名为" + uniqueFileName);
                 File uploadedFile = new File(pictureDir + uniqueFileName);
                 file.transferTo(uploadedFile);
-
+                System.out.println("图片存储路径为："+pictureDir + uniqueFileName);
+                System.out.println("path of the picture is :"+pictureDir + uniqueFileName);
                 Picture picture = new Picture();
                 picture.setUid(user.getId());
                 picture.setDescription(description);

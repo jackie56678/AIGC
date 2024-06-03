@@ -31,8 +31,8 @@ api:
 #  vid-dir: "C:\\Users\\12952\\Pictures\\AIGC\\video\\"
 #
 file:
-  pic-dir: "\\ssadmin-server\\source\\picture\\"
-  vid-dir: "\\ssadmin-server\\source\\video\\"
+  pic-dir: "/ssadmin-server/source/video/"
+  vid-dir: "/ssadmin-server/source/video/"
 
 
 
