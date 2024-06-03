@@ -11,7 +11,7 @@ ENV TZ=Asia/Shanghai
 ENV JAVA_OPTS="-Xms512m -Xmx512m -Djava.security.egd=file:/dev/./urandom"
 ENV ARGS=""
 
-EXPOSE 28080 8000
+EXPOSE 28080 9000
 
 # CMD java ${JAVA_OPTS} -jar app.jar $ARGS
 # 创建一个启动脚本来同时启动Java应用和Python HTTP服务器

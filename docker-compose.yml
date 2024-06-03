@@ -42,7 +42,7 @@ services:
         restart: unless-stopped
         ports:
             - "28080:28080"
-            - "9000:8000"
+            - "9000:9000"
         networks:
             - my_network
         environment:

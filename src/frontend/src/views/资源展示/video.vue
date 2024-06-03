@@ -41,7 +41,7 @@ export default {
         .then(response => {
           console.log(response.data.data)
           // const baseURL = 'http://localhost:8000/video/';
-          const baseURL = '/app/video/';
+          const baseURL = '/api/ssadmin-server/source/video/';
           for (let i = 0; i < response.data.data.length; i++) {
               response.data.data[i] = baseURL + response.data.data[i];
           }
