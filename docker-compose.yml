@@ -50,6 +50,9 @@ services:
             ARGS: --spring.datasource.url=${DATASOURCE_URL:-jdbc:mysql://mysql_container:3306/database?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true} --spring.datasource.username=${DATASOURCE_USERNAME:-root} --spring.datasource.password=${DATASOURCE_PASSWORD:-password}
         depends_on:
             - mysql
+        volumes:
+            - /source/picture:/ssadmin-server/source/picture
+            - /source/video:/ssadmin-server/source/video
     web:
         container_name: web_container
         build:

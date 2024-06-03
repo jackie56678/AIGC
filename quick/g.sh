@@ -1,3 +1,6 @@
+mkdir -p /source/picture
+mkdir -p /source/video
+
 yum -y group install "Development Tools"
 
 sudo yum update                 y
@@ -18,6 +21,3 @@ EOF
 
 sudo systemctl daemon-reload
 docker info
-
-chmod -R +x quick
-cp -r quick/* ~/
