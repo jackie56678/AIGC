@@ -39,7 +39,8 @@ export default {
       })
         .then(response => {
           console.log(response.data.data)
-          const baseURL = 'http://localhost:8000/picture/';
+          // const baseURL = 'http://localhost:8000/picture/';
+          const baseURL = 'http://106.14.252.181:8000/picture/';
           for (let i = 0; i < response.data.data.length; i++) {
               response.data.data[i] = baseURL + response.data.data[i];
           }
