@@ -26,13 +26,13 @@ api:
 #    app-id: "3031413662"
 #    secret: "NSBeCiTewMNoLacx"
 
-file:
-  pic-dir: "C:\\Users\\12952\\Pictures\\AIGC\\picture\\"
-  vid-dir: "C:\\Users\\12952\\Pictures\\AIGC\\video\\"
-#
 #file:
-#  pic-dir: "\\ssadmin-server\\source\\picture\\"
-#  vid-dir: "\\ssadmin-server\\source\\video\\"
+#  pic-dir: "C:\\Users\\12952\\Pictures\\AIGC\\picture\\"
+#  vid-dir: "C:\\Users\\12952\\Pictures\\AIGC\\video\\"
+#
+file:
+  pic-dir: "\\ssadmin-server\\source\\picture\\"
+  vid-dir: "\\ssadmin-server\\source\\video\\"
 
 
 
