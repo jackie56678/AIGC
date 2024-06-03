@@ -8,6 +8,4 @@ docker run -it --rm --name ssadmin-maven \
     jack666ie/javamaven:21396 mvn clean install package -e -Dmaven.test.skip=true
 
 docker compose up -d
-
-cd /source
-python3 -m http.server 9000
+docker ps -a
