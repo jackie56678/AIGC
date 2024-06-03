@@ -1,6 +1,3 @@
-chmod +x init.sh
-./init.sh
-
 docker volume create --name ssadmin-maven-repo
 
 
