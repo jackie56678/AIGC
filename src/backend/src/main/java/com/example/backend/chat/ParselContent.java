@@ -12,7 +12,6 @@ public class ParselContent{
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode rootNode;
         try {
-            
             rootNode = objectMapper.readTree(body);
             JsonNode codeNode = rootNode.path("code");
             int code = codeNode.asInt();

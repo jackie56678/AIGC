@@ -1,27 +1,24 @@
 <template>
   <div class="resource-page">
-    <div class="resource-type-selector">
-      <el-button  @click="redirectToImagePage">图片资源</el-button>
-      <el-button type="primary" @click="redirectToVideoPage">视频资源</el-button>
+    <div class="resource-navbar">
+      <el-button type="primary" icon="el-icon-picture" @click="redirectToImagePage">图片资源</el-button>
+      <el-button type="primary" icon="el-icon-video-camera" @click="redirectToVideoPage">视频资源</el-button>
     </div>
     <div class="resource-list">
-      <!-- <h2>视频资源</h2> -->
-
       <div class="video-list">
         <div v-for="(url, index) in videoResources" :key="index" class="video-item">
           <video :src="url" controls alt="Video" @click="viewVideo(url)"></video>
         </div>
       </div>
-
-      <el-button class="fixed-add-button" type="primary" @click="addVideo">添加视频</el-button>
+      <el-button class="fixed-add-button" type="primary" icon="el-icon-plus" @click="addVideo"></el-button>
     </div>
   </div>
 </template>
 
-
 <script>
 import axios from 'axios';
 import { getAccessToken } from "@/utils/auth";
+
 export default {
   data() {
     return {
@@ -33,8 +30,8 @@ export default {
   },
   methods: {
     fetchVideoResources() {
-      axios.get('/api/source/videos',{
-        headers:{
+      axios.get('/api/source/videos', {
+        headers: {
           'Authorization': 'Bearer ' + getAccessToken(),
         }
       })
@@ -50,14 +47,13 @@ export default {
         .catch(error => {
           console.error('Error fetching video resources:', error);
         });
+
     },
     addVideo() {
       this.$router.push('/source/addVideo');
     },
     viewVideo(url) {
       console.log(url);
-      // 跳转到查看资源的页面，传递当前选中的资源类型和资源ID
-      // this.$router.push({ path: '/viewResource', query: { type, id: resourceId }});
     },
     redirectToImagePage() {
       this.$router.push('/source/picture');
@@ -68,40 +64,70 @@ export default {
   }
 };
 </script>
+
 <style scoped>
 .resource-page {
+  background-color: #f4f6f8; /* 浅灰色背景 */
+  min-height: 100vh;
   padding: 20px;
 }
-.resource-type-selector {
+
+.resource-navbar {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
   margin-bottom: 20px;
 }
+
 .resource-list {
-  border: 1px solid #ccc;
+  background-color: #ffffff; /* 白色背景 */
+  border: 1px solid #ddd; /* 浅灰色边框 */
   padding: 20px;
-  padding-top: 40px; /* 增加上内边距 */
-  padding-bottom: 60px; /* 增加下内边距 */
-  position: relative; /* 为了定位固定按钮 */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+  position: relative;
 }
+
 .video-list {
-  display: flex;
-  flex-wrap: wrap;
-  max-height: 500px; /* 固定高度 */
-  overflow-y: auto; /* 超出部分滚动 */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 一行四列 */
+  gap: 20px;
+  padding: 10px;
 }
+
 .video-item {
-  margin-right: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.video-item:hover {
+  transform: scale(1.05); /* 鼠标悬停放大效果 */
 }
 
 .video-item video {
-  width: 70%;
+  width: 100%; /* 视频宽度调整 */
   height: auto;
-  cursor: pointer;
+  display: block;
 }
+
 .fixed-add-button {
-  position: absolute;
-  top: 20px;
+  position: fixed;
+  bottom: 20px;
   right: 20px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+.fixed-add-button:hover {
+  background-color: #409EFF;
 }
 </style>

@@ -8,21 +8,21 @@
         </div>
   
         <el-table :data="tasks" style="width: 100%">
-          <el-table-column prop="name" label="任务事项" width="200" ></el-table-column>
-          <el-table-column prop="ddl" label="截止时间" width="200"></el-table-column>
-          <el-table-column prop="completed" label="完成状态" width="200">
+          <el-table-column prop="name" label="任务事项" width="300" ></el-table-column>
+          <el-table-column prop="ddl" label="截止时间" width="300"></el-table-column>
+          <el-table-column prop="completed" label="完成状态" width="300">
             <template slot-scope="scope">
               <el-tag :type="scope.row.completed ? 'success' : 'info'">
                 {{ scope.row.completed ? '已完成' : '未完成' }}
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column label="修改操作" width="200">
+          <el-table-column label="修改操作" width="300">
             <template slot-scope="scope">
               <el-button size="mini" @click="editTask(scope.row)">修改</el-button>
             </template>
           </el-table-column>
-          <el-table-column label="删除操作" width="200">
+          <el-table-column label="删除操作" width="300">
             <template slot-scope="scope">
               <el-button size="mini" @click="deleteTask(scope.row)">删除</el-button>
             </template>

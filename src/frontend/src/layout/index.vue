@@ -1,85 +1,87 @@
 <template>
-  <div>
-      <div class="side-bar">
-          <el-menu class="el-menu-vertical-demo" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
-              <el-menu-item index="/profile/info" @click="$router.push('/profile')">
-                  <i class="el-icon-house"></i>
-                  <span slot="title">个人主页</span>
-              </el-menu-item>
-              <el-menu-item index="/relative/info" @click="$router.push('/relative/info')" >
-                  <i class="el-icon-menu"></i>
-                  <span slot="title">亲人信息</span>
-              </el-menu-item>
-              <el-menu-item index="/source/picture" @click="$router.push('/source/picture')">
-                  <i class="el-icon-setting"></i>
-                  <span slot="title">资源展示</span>
-              </el-menu-item>
-              <el-menu-item index="/ai/chat" @click="$router.push('/ai/chat')">
-                  <i class="el-icon-setting"></i>
-                  <span slot="title">与AI聊天</span>
-              </el-menu-item>
-              <el-menu-item index="/health" @click="$router.push('/health')">
-                  <i class="el-icon-setting"></i>
-                  <span slot="title">养生知识</span>
-              </el-menu-item>
-              <el-menu-item index="/todo/list" @click="$router.push('/todo/list')">
-                  <i class="el-icon-setting"></i>
-                  <span slot="title">语音记事本</span>
-              </el-menu-item>
-              <el-menu-item index="/logout" @click="logout">
-                  <i class="el-icon-setting"></i>
-                  <span slot="title">退出</span>
-              </el-menu-item>
-          </el-menu>
-
-          <div class="main-content" >
-            <!-- important !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-              <router-view/>   
-            <!-- important !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-          </div>
+  <div class="layout">
+    <Sider :isCollapsed="isCollapsed" />
+    <div :class="['main', { 'collapsed': isCollapsed }]">
+      <Header :isCollapsed="isCollapsed" @toggle-collapse="handleToggleCollapse" />
+      <div class="header-placeholder"></div>
+      <div class="content">
+        <router-view></router-view>
       </div>
+    </div>
   </div>
 </template>
-  
- <script>
-  import { removeToken } from '@/utils/auth'
-  
-  export default {
-    name: "MyComponent",
-    methods: {
-      logout() {
-        this.$confirm('确定注销并退出系统吗？', '提示').then(() => {
-          removeToken()
-          this.$router.push({ path: '/' }) // 重定向到登录页面
-        }).catch(() => {});
-      },
-    },
-  };
-  </script>
-  
-  
-  <style lang="scss" scoped>
-  .el-menu-vertical-demo{
-    position: fixed;
-    z-index: 1;
-    width: 10%;
-    // flex:1;
-  }
-  
-  .main-content {
-  flex: 9;
-  padding: 20px;
-  width: 89%;
-  float: right;
-  // margin-left: auto;
-  }
 
-  .side-bar {
-  // display: flex;
+<script>
+import Header from './Components/header.vue';
+import Sider from './Components/sider.vue';
 
+export default {
+  components: {
+    Header,
+    Sider
+  },
+  data() {
+    return {
+      isCollapsed: false
+    };
+  },
+  methods: {
+    handleToggleCollapse() {
+      this.isCollapsed = !this.isCollapsed;
+    }
+  }
+};
+</script>
+
+<style scoped>
+.layout {
+  display: flex;
   height: 100vh;
-  // position: fixed;
-  }
-  
-  </style>
-  
+  background-color: #f0f2f5;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  transition: margin-left 0.3s, background-color 0.3s;
+  margin-left: 220px; /* 侧边栏全宽状态下的左边距 */
+}
+
+.main.collapsed {
+  margin-left: 60px; /* 侧边栏收缩状态下的左边距 */
+}
+
+.header-placeholder {
+  height: 60px; /* header的高度 */
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #ffffff;
+  overflow: auto;
+  height: calc(100vh - 60px); /* 调整以适应header的高度 */
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s, background-color 0.3s;
+}
+
+.content:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+</style>

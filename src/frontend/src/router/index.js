@@ -5,11 +5,23 @@ import Layout from '@/layout'
 Vue.use(VueRouter)
 
 const routes = [
+
   {
     path: '/',
+    name: 'Home',
+    component: () => import( '../views/主页/Home.vue')
+  },
+  {
+    path: '/login',
     name: 'Login',
     component: () => import( '../views/登录注册/Login.vue')
   },
+
+  // {
+  //   path: '/',
+  //   name: 'Login',
+  //   component: () => import( '../views/登录注册/Login.vue')
+  // },
   {
     path: '/register',
     name: 'Register',

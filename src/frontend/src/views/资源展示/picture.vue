@@ -1,18 +1,16 @@
 <template>
   <div class="resource-page">
-    <div class="resource-type-selector">
-      <el-button type="primary" >图片资源</el-button>
-      <el-button @click="redirectToVideoPage">视频资源</el-button>
+    <div class="resource-navbar">
+      <el-button type="primary" icon="el-icon-picture" @click="redirectToImagePage">图片资源</el-button>
+      <el-button type="primary" icon="el-icon-video-camera" @click="redirectToVideoPage">视频资源</el-button>
     </div>
     <div class="resource-list">
-      <!-- <h2>图片资源</h2> -->
       <div class="image-list">
         <div v-for="(url, index) in imageResources" :key="index" class="image-item">
           <img :src="url" alt="Image" @click="viewImage(url)"> 
         </div>
       </div>
-      <!-- <img src="https://gss0.baidu.com/9fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/cc11728b4710b912ba1a8ca0c4fdfc0393452290.jpg"> -->
-      <el-button class="fixed-add-button" type="primary" @click="addImage">添加图片</el-button>
+      <el-button class="fixed-add-button" type="primary" icon="el-icon-plus" @click="addImage"></el-button>
     </div>
   </div>
 </template>
@@ -28,15 +26,16 @@ export default {
     };
   },
   created() {
-    this.fetchImageResources(); // 页面加载时自动调用获取图片资源的方法
+    this.fetchImageResources();
   },
   methods: {
     fetchImageResources() {
-      axios.get('/api/source/images',{
-        headers:{
+      axios.get('/api/source/images', {
+        headers: {
           'Authorization': 'Bearer ' + getAccessToken(),
         }
       })
+
         .then(response => {
           console.log(response.data.data)
           // const baseURL = 'http://localhost:8000/picture/';
@@ -58,16 +57,19 @@ export default {
         // 否则，返回空字符串或者默认的图片地址
         return '';
       }
+
     },
     addImage() {
       this.$router.push('/source/addPicture');
     },
     viewImage(url) {
       console.log('查看图片:', url);
-      // 在这里你可以实现点击图片后的预览或其他操作
     },
     redirectToVideoPage() {
       this.$router.push('/source/video');
+    },
+    redirectToImagePage() {
+      this.$router.push('/source/picture');
     }
   }
 };
@@ -75,38 +77,67 @@ export default {
 
 <style scoped>
 .resource-page {
+  background-color: #f4f6f8;
+  min-height: 100vh;
   padding: 20px;
 }
-.resource-type-selector {
+
+.resource-navbar {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
   margin-bottom: 20px;
 }
+
 .resource-list {
-  border: 1px solid #ccc;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
   padding: 20px;
-  padding-top: 40px;
-  padding-bottom: 60px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
 }
+
 .image-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 20px;
   padding: 10px;
 }
+
 .image-item {
-  margin-right: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.image-item:hover {
+  transform: scale(1.05);
 }
 
 .image-item img {
-  width: 70%;
+  width: 100%;
   height: auto;
-  cursor: pointer;
+  display: block;
 }
+
 .fixed-add-button {
-  position: absolute;
-  top: 20px;
+  position: fixed;
+  bottom: 20px;
   right: 20px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+.fixed-add-button:hover {
+  background-color: #409EFF;
 }
 </style>

@@ -68,5 +68,4 @@ public class vivogpt {
         }
         return queryStringBuilder.toString();
     }
-
 }
