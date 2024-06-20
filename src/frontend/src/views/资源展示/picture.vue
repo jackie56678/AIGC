@@ -38,8 +38,8 @@ export default {
 
         .then(response => {
           console.log(response.data.data)
-          // const baseURL = 'http://localhost:8000/picture/';
-          const baseURL = '/app/picture/';
+          const baseURL = 'http://localhost:8000/picture/';
+          // const baseURL = '/app/picture/';
           for (let i = 0; i < response.data.data.length; i++) {
               response.data.data[i] = baseURL + response.data.data[i];
           }

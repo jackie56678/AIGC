@@ -32,6 +32,10 @@
           <i class="el-icon-notebook-1"></i>
           <span slot="title">语音记事本</span>
         </el-menu-item>
+        <el-menu-item index="/ocr/list" @click="handleMenuClick('/ocr/list')">
+          <i class="el-icon-document"></i>
+          <span slot="title">体检报告分析</span>
+        </el-menu-item>
         <el-menu-item index="/logout" @click="logout">
           <i class="el-icon-switch-button"></i>
           <span slot="title">退出</span>

@@ -18,7 +18,7 @@ public class vivogpt {
         String DOMAIN = "api-ai.vivo.com.cn";
         String METHOD = "POST";
         UUID requestId = UUID.randomUUID();
-        System.out.println("requestId: " + requestId);
+//        System.out.println("requestId: " + requestId);
 
 
         Map<String, Object> map = new HashMap<>();
@@ -31,12 +31,12 @@ public class vivogpt {
         data.put("model", "vivo-BlueLM-TB");
         UUID sessionId = UUID.randomUUID();
         data.put("sessionId", sessionId.toString());
-        System.out.println(sessionId);
+//        System.out.println(sessionId);
 
 
         HttpHeaders headers = VivoAuth.generateAuthHeaders(appId, appKey, METHOD, URI, queryStr);
         headers.add("Content-Type", "application/json");
-        System.out.println(headers);
+//        System.out.println(headers);
         String url = String.format("http://%s%s?%s", DOMAIN, URI, queryStr);
         String requsetBodyString = new ObjectMapper().writeValueAsString(data);
         RestTemplate restTemplate = new RestTemplate();

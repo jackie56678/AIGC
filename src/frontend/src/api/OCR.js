@@ -7,7 +7,7 @@ export function list() {
     })
 }
 
-// export function add(report,date) {
+// export function add(,date) {
 //   return request({
 //     url: '/ocr/add',
 //     method: 'post',
@@ -20,10 +20,8 @@ export function list() {
 
 export function list2(hid) {
     return request({
-      url: '/ocr/list',
-      method: 'get',
-      params:{
-        hid:hid
-      }
+      url: '/ocr/list2',
+      method: 'post',
+      data:hid
     })
 }

@@ -4,6 +4,7 @@ import com.example.backend.chat.ParselContent;
 import com.example.backend.chat.vivogpt;
 import com.example.backend.user.User;
 import com.example.backend.user.UserService;
+import com.example.backend.utils.Parsel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,8 @@ import java.util.UUID;
 @RequestMapping("/ocr")
 public class ReportController {
 
+//    @Autowired
+//    private Parsel parsel2;
     @Autowired
     private ReportMapper reportMapper;
     @Autowired
@@ -48,24 +51,21 @@ public class ReportController {
         Report report = new Report();
         report.setUid(user.getId());
         report.setDate(date);
-        //识别图片+存入result
         String result  = ocr.ocrTest(file);
-        //判断error_code是否为0
-
-        //判断error_code是否为0
         System.out.println("result:"+result);
-        //处理result
-
-        //处理result
-        report.setResult(result);
-        //生成suggestion
-        String question = "请根据以下的体检报告内容进行分析，并根据报告内容给出保持健康的建议：" + result;
+        Parsel parsel = new Parsel();
+        String resultup = parsel.parsel(result).getData().toString();
+        System.out.println("resultup:"+resultup);
+        report.setResult(resultup);
+        String question = "请根据以下的体检报告内容进行分析，并根据报告内容给出保持健康的建议，内容中和报告不相关的文字请忽略，只关注和体检报告相关的内容：" + resultup;
+        System.out.println("question:"+question);
         String jsonResponse = vivogpt.vivogpt(question);
         ParselContent parselContent = new ParselContent();
         CommonResult commonResult = parselContent.parsel(jsonResponse);
         int code = commonResult.getCode();
         if(code==200) {
             String suggestion = commonResult.getData().toString();
+            System.out.println("suggestion:"+suggestion);
             report.setSuggestion(suggestion);
             String uniqueFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
             System.out.println("文件名为" + uniqueFileName);
@@ -78,8 +78,8 @@ public class ReportController {
         return CommonResult.error(400,"报告添加失败");
     }
 
-    @GetMapping("/list2")
-    public CommonResult<?> list2(@RequestParam("hid") int hid, @RequestHeader("Authorization") String accessToken) throws Exception {
+    @PostMapping("/list2")
+    public CommonResult<?> list2(@RequestBody int hid, @RequestHeader("Authorization") String accessToken) throws Exception {
         String token = accessToken.substring(7);
         User user = userService.getUserInfoByToken(token);
         Report report = reportMapper.list2(user.getId(), hid);

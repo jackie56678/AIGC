@@ -36,7 +36,7 @@ public class OCR {
             //构建请求体
             Map<String, String> postParams = new HashMap<>();
             postParams.put("image", encodedImage);
-            postParams.put("pos", "2");
+            postParams.put("pos", "0");
             postParams.put("businessid", "1990173156ceb8a09eee80c293135279");
             //请求参数
             Map<String, String> map = new HashMap<>();

@@ -128,6 +128,27 @@ const routes = [
     }
   ]
 },
+{
+  path:'/ocr',
+  component:Layout,
+  children:[
+    {
+      path: 'list',   
+      name: 'ocrlist',
+      component: () => import( '../views/OCR/list.vue')
+    },
+    {
+      path: 'addreport',   
+      name: 'addreport',
+      component: () => import( '../views/OCR/addfile.vue')
+    },
+    {
+      path: 'showreport',   
+      name: 'showreport',
+      component: () => import( '../views/OCR/show.vue')
+    }
+  ]
+},
 ///////////////////////////////////////////////////////////////////
 {
   path:'/todo',
