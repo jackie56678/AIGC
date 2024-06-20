@@ -29,10 +29,11 @@ api:
 #file:
 #  pic-dir: "C:\\Users\\12952\\Pictures\\AIGC\\picture\\"
 #  vid-dir: "C:\\Users\\12952\\Pictures\\AIGC\\video\\"
-#
+#  rep-dir: "C:\\Users\\12952\\Pictures\\AIGC\\report\\"
 file:
   pic-dir: "/ssadmin-server/source/picture/"
   vid-dir: "/ssadmin-server/source/video/"
+  rep-dir: "/ssadmin-server/source/report/"
 
 
 
