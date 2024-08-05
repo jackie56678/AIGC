@@ -26,7 +26,6 @@
 
 <!--    <insert id="insertChatHistory" parameterType="com.example.backend.chat.ChatHistory">-->
     <insert id="insertChatHistory" parameterType="com.example.backend.chat.ChatHistory" useGeneratedKeys="true" keyProperty="sessionid" keyColumn="sessionid">
-
         INSERT INTO chathistory (uid, date)
         VALUES (#{uid}, #{date})
     </insert>
