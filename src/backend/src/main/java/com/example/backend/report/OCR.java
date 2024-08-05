@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -31,7 +32,19 @@ public class OCR {
             InputStream inputStream = file.getInputStream();
 //                    getClass().getResourceAsStream("/test.jpg");
             // 将输入流转换为字节数组
-            fileContent = inputStream.readAllBytes();
+//            fileContent = inputStream.readAllBytes();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+
+                // 读取 InputStream 的内容到 ByteArrayOutputStream
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    bos.write(buffer, 0, bytesRead);
+                }
+
+                // 获取字节数组
+                fileContent = bos.toByteArray();
             String encodedImage = new String(Base64.getEncoder().encode(fileContent), "UTF-8");
             //构建请求体
             Map<String, String> postParams = new HashMap<>();
